@@ -1,0 +1,27 @@
+{
+  "name": "payment-gateway-crypto",
+  "version": "1.0.0",
+  "description": "A payment gateway for reciving payments on zkEVM: Cardona testnet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shubhiscoding/Payment-GateWay-Crypto.git"
+  },
+  "keywords": [
+    "Payment",
+    "gateway",
+    "crypto"
+  ],
+  "author": "Shubh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shubhiscoding/Payment-GateWay-Crypto/issues"
+  },
+  "homepage": "https://github.com/shubhiscoding/Payment-GateWay-Crypto#readme",
+  "dependencies": {
+    "ethers": "^6.13.1"
+  }
+}
