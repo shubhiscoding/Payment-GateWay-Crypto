@@ -1,6 +1,6 @@
 {
   "name": "payment-gateway-crypto",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "A payment gateway for reciving payments on zkEVM: Cardona testnet",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,11 @@
   },
   "homepage": "https://github.com/shubhiscoding/Payment-GateWay-Crypto#readme",
   "dependencies": {
-    "ethers": "^6.13.1"
+    "@web3modal/ethers": "^5.0.6",
+    "@coinbase/wallet-sdk": "^4.0.4",
+    "@walletconnect/ethereum-provider": "^2.13.3",
+    "@walletconnect/web3wallet": "^1.12.3",
+    "ethers": "^6.13.1",
+    "web3modal": "^1.9.12"
   }
 }

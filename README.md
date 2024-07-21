@@ -1,4 +1,4 @@
-NOTE: CURRENTLY I'M WORKING ON THIS, AND IT'S ON ZK EVM CARDONA TESTNET ONLY!!
+NOTE: IT'S ON ZK EVM CARDONA TESTNET ONLY!!
 
 
 # Payment Gateway Crypto
@@ -88,7 +88,7 @@ export default PaymentComponent;
 
 ## Author
 
-Your Name - [Your Email](mailto:kesharwanis084@gmail.com)
+Shubh Kesharwani - [Your Email](mailto:kesharwanis084@gmail.com)
 
 ## Acknowledgements
 
