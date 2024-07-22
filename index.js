@@ -5,11 +5,20 @@ const projectId = '231bf253a5ade0e462452df1d078fe6f';
 
 // 2. Set chains
 const mainnet = {
-  chainId: 2442,
-  name: 'Polygon zkEVM Cardona Testnet',
-  currency: 'ETH',
-  explorerUrl: 'https://etherscan.io',
-  rpcUrl: 'https://polygon-zkevm-cardona.blockpi.network/v1/rpc/public'
+  POLzk: {
+    chainId: 2442,
+    name: 'Polygon zkEVM Cardona Testnet',
+    currency: 'ETH',
+    explorerUrl: 'https://cardona-zkevm.polygonscan.com/',
+    rpcUrl: 'https://polygon-zkevm-cardona.blockpi.network/v1/rpc/public'
+  },
+  BASE : {
+    chainId: 84532,
+    name: 'Base Sepolia Testnet',
+    currency: 'ETH',
+    explorerUrl: 'https://base-sepolia.blockscout.com/',
+    rpcUrl:'https://base-sepolia.blockpi.network/v1/rpc/public'
+  }
 };
 
 // 3. Create your application's metadata object
@@ -20,6 +29,14 @@ const metadata = {
   icons: ['https://avatars.mywebsite.com/']
 };
 
+const addresses = {
+  POLzk: "0x9C1f119b49c650b0789F36E43BEe257BD1f2cfef",
+  BASE: "0x9C1f119b49c650b0789F36E43BEe257BD1f2cfef"
+}
+
+const handlePayment = async (amount, address, ntwrk) => {
+
+  const details = mainnet[ntwrk];
 // 4. Create Ethers config
 const ethersConfig = defaultConfig({
   /*Required*/
@@ -34,8 +51,8 @@ const ethersConfig = defaultConfig({
   enableEIP6963: true, // true by default
   enableInjected: true, // true by default
   enableCoinbase: true, // true by default
-  rpcUrl: 'https://polygon-zkevm-cardona.blockpi.network/v1/rpc/public', // used for the Coinbase SDK
-  defaultChainId: 2442, // used for the Coinbase SDK
+  rpcUrl: details.rpcUrl, // used for the Coinbase SDK
+  defaultChainId: details.chainId, // used for the Coinbase SDK
   providerOptions: {
     injected: {
       display: {
@@ -50,24 +67,21 @@ const ethersConfig = defaultConfig({
 // 5. Create a Web3Modal instance
 const modal = createWeb3Modal({
   ethersConfig,
-  chains: [mainnet],
+  chains: [details],
   projectId
 });
 
 const { open, selectedNetworkId } = modal.getState();
-
-const handlePayment = async (amount, address) => {
   
     const getProvider = async () => {
-        const walletProvider = modal.getWalletProvider();
-        if(selectedNetworkId !== 2442) {
-            const chainId = 2442;
-            modal.switchNetwork(chainId)
+        if(selectedNetworkId !== details.chainId) {
+            const chainId = details.chainId;
+            await modal.switchNetwork(chainId);
         }
-        
+        const walletProvider = modal.getWalletProvider();
         const ethersProvider = new BrowserProvider(walletProvider);
         const signer = await ethersProvider.getSigner();
-        const contractAddress = '0x9C1f119b49c650b0789F36E43BEe257BD1f2cfef';
+        const contractAddress = addresses[ntwrk];
         const contractABI = [
           "function pay(uint256 amnt, address reciver) public payable",
         ];
@@ -93,6 +107,6 @@ const handlePayment = async (amount, address) => {
         const tx = await getProvider();
         return tx;
     }
-};
+  };
 
 module.exports = { handlePayment };

@@ -1,4 +1,4 @@
-NOTE: IT'S ON ZK EVM CARDONA TESTNET ONLY!!
+NOTE: CURRENTLY IT ONLY SUPPORTS ZK EVM CARDONA TESTNET AND BASE SEPOLIA TESTNET ONLY!!
 
 
 # Payment Gateway Crypto
@@ -37,21 +37,20 @@ The `handlePayment` function allows you to make payments to a specified Ethereum
 import { handlePayment } from 'payment-gateway-crypto';
 
 const amount = 0.001; // Example amount in Ether
-const address = '0x1F85a21033Da743136C1808D635e8679221418d1'; // Example Ethereum address
-
-handlePayment(amount, address).then(() => {
+const address = '0x1F85a21033Da743136C1808D635e8679221418d1'; // Receiver's wallet address
+const netwrok = 'POLzk'; //'POLzk' for Polygon zkEVM and 'BASE' for Base Sepolia network
+handlePayment(amount, address, network).then(() => {
     console.log('Payment successful');
 }).catch(error => {
     console.error('Payment failed', error);
 });
 ```
 
-### API
-
 #### `handlePayment(amount, address)`
 
 - `amount` (number): The amount of Ether to send.
 - `address` (string): The recipient's Ethereum address.
+- `network` (string): 'POLzk' for Polygon zkEVM CARDONA Testnet and 'BASE' for Base Sepolia network
 
 This function sends the specified amount of Ether to the given address using the connected Ethereum wallet.
 
@@ -65,11 +64,11 @@ import { handlePayment } from 'payment-gateway-crypto';
 
 const PaymentComponent = ({ amount }) => {
     const address = '0x1F85a21033Da743136C1808D635e8679221418d1';
-
+    const network = 'BASE';
     const handleButtonClick = async () => {
         try {
-            await handlePayment(amount, address);
-            console.log('Payment successful');
+           const tx = await handlePayment(amount, address, network);
+            console.log('Payment successful', tx);
         } catch (error) {
             console.error('Payment failed', error);
         }
